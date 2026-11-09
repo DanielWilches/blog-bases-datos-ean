@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motores Relacionales Licenciados Más Utilizados | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Análisis exhaustivo de Oracle Database, Microsoft SQL Server, IBM Db2 y SAP HANA: modelos de licenciamiento por núcleos, alta disponibilidad y soporte corporativo.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link active">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke_linecap="round" stroke_linejoin="round" stroke_width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#temas-academicos">Temas Académicos</a>
+        <span>&rsaquo;</span>
+        <span>Tema 5: Motores Licenciados</span>
+      </nav>
+      <span class="card-badge engines">Comercial / Enterprise</span>
+      <h1 class="article-title">¿Cuáles son los motores de bases de datos relacionales licenciados más utilizados?</h1>
+      <div class="article-meta">
+        <span>Publicado: Febrero 2026</span>
+        <span>Lectura estimada: 8 min</span>
+        <span>Área: Gestión Empresarial & Infraestructura TI</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        Los motores de bases de datos comerciales o licenciados son plataformas propietarias respaldadas por corporaciones multinacionales que ofrecen garantías de soporte técnico 24/7 con acuerdos de nivel de servicio (SLA), optimización especializada para cargas de trabajo de misión crítica, parches de seguridad continuos y certificaciones regulatorias mundiales.
+      </p>
+
+      <p>
+        En el desarrollo y despliegue de aplicaciones corporativas, los cuatro motores propietarios más influyentes y adoptados a nivel global son:
+      </p>
+
+      <!-- Tabla Comparativa -->
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Motor</th>
+              <th>Fabricante</th>
+              <th>Modelo de Licenciamiento</th>
+              <th>Tecnologías Clave</th>
+              <th>Sector Predominante</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Oracle Database (19c/23ai)</strong></td>
+              <td>Oracle Corporation</td>
+              <td>Por Núcleo Físico (<em>Processor Core Factor</em>) o Usuario Nominal (Named User Plus).</td>
+              <td>RAC (Real Application Clusters), Exadata, Multitenant PDB/CDB, PL/SQL compilado nativo.</td>
+              <td>Banca central, telecomunicaciones, gobiernos y aerolíneas.</td>
+            </tr>
+            <tr>
+              <td><strong>Microsoft SQL Server (2022/2025)</strong></td>
+              <td>Microsoft</td>
+              <td>Por Paquetes de 2 Núcleos (Core-based) o Servidor + Licencias CAL (Client Access).</td>
+              <td>Always On Availability Groups, In-Memory OLTP, T-SQL, integración profunda con Azure e híbrido.</td>
+              <td>Empresas medianas/grandes, sector salud, retail y soluciones integradas en entorno .NET.</td>
+            </tr>
+            <tr>
+              <td><strong>IBM Db2</strong></td>
+              <td>IBM</td>
+              <td>Unidades de Valor de Procesador (PVU - Processor Value Unit) o suscripción en la nube.</td>
+              <td>PureScale (clustering activo-activo sin shared disk), compresión adaptativa, BLU Acceleration.</td>
+              <td>Entornos bancarios transaccionales sobre mainframes IBM z/OS y sistemas Unix/Linux.</td>
+            </tr>
+            <tr>
+              <td><strong>SAP HANA</strong></td>
+              <td>SAP SE</td>
+              <td>Licenciamiento basado en capacidad de memoria RAM asignada (GB / TB de RAM).</td>
+              <td>Procesamiento In-Memory masivo, motor híbrido columna/fila, analítica espacial y predictiva integrada.</td>
+              <td>Organizaciones que operan el ERP SAP S/4HANA y cadenas de suministro globales.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>1. Examen en Profundidad de los Gigantes Comerciales</h2>
+
+      <h3>A. Oracle Database: El Titán del Núcleo Empresarial</h3>
+      <p>
+        Oracle Database es el estándar de facto en la banca mundial debido a su legendaria resiliencia y su arquitectura <strong>Real Application Clusters (RAC)</strong>, la cual permite que múltiples instancias de servidores distintos compartan el acceso a un almacenamiento compartido, logrando tolerancia total a fallos a nivel de servidor sin interrupción del servicio (Silberschatz et al., 2020).
+      </p>
+      <ul>
+        <li><strong>Multitenancy:</strong> Permite alojar cientos de bases de datos conectables (<em>Pluggable Databases - PDB</em>) dentro de una base de datos contenedora (<em>CDB</em>), facilitando la consolidación de servidores.</li>
+        <li><strong>Oracle 23ai:</strong> La versión moderna incorpora búsqueda vectorial nativa con IA dentro de sentencias SQL estándar y soporte para grafos en memoria.</li>
+      </ul>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>PL/SQL Block (Oracle)</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>-- Bloque anónimo PL/SQL con control de excepciones y transacciones
+DECLARE
+    v_saldo_actual NUMBER;
+BEGIN
+    SELECT saldo INTO v_saldo_actual FROM cuentas WHERE id_cuenta = 4058 FOR UPDATE;
+    
+    IF v_saldo_actual >= 500000 THEN
+        UPDATE cuentas SET saldo = saldo - 500000 WHERE id_cuenta = 4058;
+        INSERT INTO auditoria_retiros (id_cuenta, monto, fecha) VALUES (4058, 500000, SYSDATE);
+        COMMIT;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'Fondos insuficientes para la transacción');
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Error transaccional: ' || SQLERRM);
+END;</code></pre>
+      </div>
+
+      <h3>B. Microsoft SQL Server: Cohesión y Productividad</h3>
+      <p>
+        SQL Server destaca por su excelente experiencia de administración a través de <em>SQL Server Management Studio (SSMS)</em> y su completa suite de herramientas para Inteligencia de Negocios incorporadas: SSIS (integración y ETL), SSAS (cubos analíticos) y SSRS (generación de informes).
+      </p>
+      <p>
+        Su solución de alta disponibilidad, <strong>Always On Availability Groups</strong>, permite mantener hasta 8 réplicas secundarias sincronizadas, algunas de las cuales pueden dedicarse exclusivamente a lectura de reportes sin afectar el rendimiento transaccional del nodo primario.
+      </p>
+
+      <h3>C. SAP HANA: La Revolución en Memoria</h3>
+      <p>
+        A diferencia de los motores tradicionales que guardan los datos en disco y suben páginas a RAM según necesidad, SAP HANA mantiene la totalidad de los datos residiendo de forma permanente en la memoria RAM, utilizando el almacenamiento SSD solo como mecanismo de persistencia y registro transaccional. Esto le permite ejecutar cálculos analíticos y transacciones a velocidades de decenas a cientos de veces mayores que los motores mecánicos tradicionales.
+      </p>
+
+      <div class="callout warning">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          Consideraciones de Costo y Gobernanza (TCO)
+        </div>
+        <p>
+          El costo total de propiedad (<em>Total Cost of Ownership - TCO</em>) de estos motores es elevado. Una licencia Enterprise de Oracle o SQL Server puede costar decenas de miles de dólares por cada núcleo de CPU, sumado a un 20% anual obligatorio por concepto de soporte y mantenimiento. Por esta razón, los arquitectos de software evalúan con sumo cuidado si el proyecto verdaderamente requiere garantías comerciales propietarias o si puede implementarse con motores Open Source de grado empresarial como PostgreSQL.
+        </p>
+      </div>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Referencias Bibliográficas </h3>
+        <ul>
+          <li>Elmasri, R., & Navathe, S. B. (2016). <em>Fundamentals of Database Systems</em> (7th ed.). Pearson.</li>
+          <li>Oracle Corporation. (2024). <em>Oracle Database 23ai Concepts & Architecture Guide</em>. Oracle Documentation.</li>
+          <li>Silberschatz, A., Korth, H. F., & Sudarshan, S. (2020). <em>Database System Concepts</em> (7th ed.). McGraw-Hill Education.</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./nosql-actualidad.html" class="read-more-link">&larr; Anterior: NoSQL en la Actualidad</a>
+        <a href="./motores-opensource.html" class="read-more-link">Siguiente: Motores Relacionales Open Source &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

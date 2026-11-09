@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticia: La Revolución de las Bases de Datos Vectoriales | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Análisis técnico de cómo las bases de datos vectoriales y extensiones como pgvector impulsan la inteligencia artificial generativa y las arquitecturas RAG.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link active">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke_linecap="round" stroke_linejoin="round" stroke_width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#noticias">Noticias Globales</a>
+        <span>&rsaquo;</span>
+        <span>Entrada Cronológica #1</span>
+      </nav>
+      <span class="card-badge news">IA & Vectores</span>
+      <h1 class="article-title">La Revolución de las Bases de Datos Vectoriales: El Pilar de la Inteligencia Artificial y RAG</h1>
+      <div class="article-meta">
+        <span>Publicado: 15 de Febrero de 2026</span>
+        <span>Lectura estimada: 6 min</span>
+        <span>Por: Redacción Tecnológica &bull; Universidad EAN</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        Durante décadas, las bases de datos buscaron coincidencias exactas: números idénticos, cadenas textuales específicas o rangos de fechas definidos. Sin embargo, la consolidación mundial de los Grandes Modelos de Lenguaje (LLMs) como GPT-4, Claude 3.5 y Gemini ha catapultado un paradigma radicalmente distinto: <strong>la búsqueda semántica basada en la proximidad de significado</strong>.
+      </p>
+
+      <h2>1. El Desafío de los Embeddings y la Memoria de la IA</h2>
+      <p>
+        Los modelos de inteligencia artificial no comprenden palabras como caracteres alfabéticos, sino como vectores matemáticos en espacios de cientos o miles de dimensiones (<em>embeddings</em>). En este espacio multidimensional, conceptos conceptualmente similares (por ejemplo, <em>"contrato laboral"</em> y <em>"acuerdo de trabajo"</em>) se ubican matemáticamente cerca mediante distancias de coseno o distancias euclidianas.
+      </p>
+
+      <p>
+        Para almacenar millones de estos vectores y recuperar los más cercanos en cuestión de milisegundos, los motores convencionales basados en árboles B+ colapsan. Esto detonó el auge de las <strong>bases de datos vectoriales nativas</strong> (como Pinecone, Milvus, Qdrant y Weaviate) y la rápida adaptación de gigantes relacionales mediante extensiones como <strong>pgvector</strong> en PostgreSQL.
+      </p>
+
+      <h2>2. El Algoritmo HNSW: El Corazón del Índice Vectorial</h2>
+      <p>
+        El estándar dominante en la indexación vectorial moderna es el algoritmo <strong>HNSW</strong> (<em>Hierarchical Navigable Small World</em>). En lugar de comparar el vector de consulta contra cada uno de los millones de vectores almacenados (lo que tomaría segundos o minutos), HNSW construye una estructura de grafos jerárquicos por capas por los que la búsqueda navega a hipervelocidad:
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>SQL con pgvector en PostgreSQL</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>-- Habilitar la extensión de vectores en PostgreSQL
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- Crear tabla de documentos corporativos con embedding de 1536 dimensiones
+CREATE TABLE articulos_conocimiento (
+    id SERIAL PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    contenido TEXT NOT NULL,
+    embedding vector(1536) -- Vector generado por el modelo de IA
+);
+
+-- Crear índice ultrarrápido HNSW con métrica de distancia de Coseno
+CREATE INDEX idx_articulos_hnsw ON articulos_conocimiento 
+USING hnsw (embedding vector_cosine_ops);
+
+-- Consulta de búsqueda semántica (Top 3 documentos más cercanos a la duda del usuario)
+SELECT titulo, contenido, (embedding <=> '[0.015, -0.042, 0.881, ...]') AS distancia_coseno
+FROM articulos_conocimiento
+ORDER BY distancia_coseno ASC
+LIMIT 3;</code></pre>
+      </div>
+
+      <h2>3. Impacto en las Arquitecturas RAG (Retrieval-Augmented Generation)</h2>
+      <p>
+        El impacto empresarial más profundo de esta tecnología reside en los sistemas <strong>RAG</strong>. En lugar de reentrenar costosos modelos de IA desde cero con datos privados, las organizaciones convierten sus bases documentales en vectores. Cuando un usuario realiza una pregunta, el motor vectorial recupera con precisión milimétrica los fragmentos relevantes de las bases de datos internas y se los suministra como contexto al modelo de IA, <strong>eliminando las alucinaciones y garantizando respuestas basadas en hechos verificables</strong>.
+      </p>
+
+      <div class="callout info">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Tendencia del Mercado
+        </div>
+        <p>
+          Las proyecciones de consultoras tecnológicas indican que para 2027 más del 80% de las aplicaciones empresariales incorporarán algún componente de búsqueda vectorial en sus bases de datos para potenciar agentes autónomos y asistentes cognitivos corporativos.
+        </p>
+      </div>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Fuentes y Referencias</h3>
+        <ul>
+          <li>Malkov, Y. A., & Yashunin, D. A. (2020). Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, 42(4), 824–836.</li>
+          <li>PostgreSQL Global Development Group. (2025). <em>pgvector: Open-source vector similarity search for Postgres</em>. pgvector Documentation.</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="../index.html#noticias" class="read-more-link">&larr; Volver a Noticias</a>
+        <a href="./noticia-2-postgresql-mysql-evolucion.html" class="read-more-link">Siguiente Noticia: PostgreSQL 17/18 & MySQL 9 &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

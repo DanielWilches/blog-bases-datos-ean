@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué características tiene una base de datos relacional? | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Fundamentos matemáticos del modelo relacional de Codd, restricciones de integridad y las propiedades transaccionales ACID con sus niveles de aislamiento.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link active">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#temas-academicos">Temas Académicos</a>
+        <span>&rsaquo;</span>
+        <span>Tema 2: Base de Datos Relacional</span>
+      </nav>
+      <span class="card-badge relational">Modelo Relacional</span>
+      <h1 class="article-title">¿Qué características tiene una base de datos relacional?</h1>
+      <div class="article-meta">
+        <span>Publicado: Febrero 2026</span>
+        <span>Lectura estimada: 8 min</span>
+        <span>Área: Modelado & Diseño Lógico de Datos</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        El modelo de base de datos relacional fue formulado en 1970 por el matemático e investigador británico de IBM, <strong>Edgar Frank Codd</strong>, en su histórico artículo <em>"A Relational Model of Data for Large Shared Data Banks"</em> (Codd, 1970). Esta innovación representó una auténtica revolución paradigmática en la informática al separar limpiamente la representación lógica de los datos de su implementación física en disco.
+      </p>
+
+      <h2>1. Fundamentos Matemáticos y Terminología Formal</h2>
+      <p>
+        Una base de datos relacional se fundamenta rigurosamente en la <strong>teoría de conjuntos</strong> y en la <strong>lógica de predicados de primer orden</strong>. Aunque en el lenguaje cotidiano de la industria se habla de tablas, filas y columnas, la literatura técnica formal define:
+      </p>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Término Formal (Codd)</th>
+              <th>Término Estándar SQL</th>
+              <th>Definición Matemática / Conceptual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Relación</strong></td>
+              <td>Tabla</td>
+              <td>Subconjunto del producto cartesiano de una lista de dominios <i>D</i><sub>1</sub> &times; <i>D</i><sub>2</sub> &times; ... &times; <i>D</i><sub><i>n</i></sub>.</td>
+            </tr>
+            <tr>
+              <td><strong>Tupla</strong></td>
+              <td>Fila / Registro</td>
+              <td>Elemento individual de una relación. Representa una instancia concreta o aserción lógica del mundo real.</td>
+            </tr>
+            <tr>
+              <td><strong>Atributo</strong></td>
+              <td>Columna / Campo</td>
+              <td>Propiedad nombrada que describe el papel de un dominio dentro de la relación.</td>
+            </tr>
+            <tr>
+              <td><strong>Dominio</strong></td>
+              <td>Tipo de dato / Restricción</td>
+              <td>Conjunto de valores atómicos permitidos para un atributo (ej. enteros positivos, cadenas alfanuméricas).</td>
+            </tr>
+            <tr>
+              <td><strong>Grado</strong></td>
+              <td>Número de columnas</td>
+              <td>Cantidad total de atributos que componen el esquema de la relación.</td>
+            </tr>
+            <tr>
+              <td><strong>Cardinalidad</strong></td>
+              <td>Número de filas</td>
+              <td>Cantidad actual de tuplas almacenadas en la relación. Varía dinámicamente con las operaciones DML.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Reglas y Restricciones de Integridad</h2>
+      <p>
+        La confiabilidad de un sistema relacional descansa en el cumplimiento ineludible de tres niveles de integridad:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Integridad de Entidad:</strong> Toda tabla debe tener una <strong>Clave Primaria (Primary Key - PK)</strong> cuyos valores sean únicos y no nulos (<em>NOT NULL</em>). Esto garantiza que ninguna tupla sea idéntica a otra y que cada registro sea inequívocamente localizable.
+        </li>
+        <li>
+          <strong>Integridad Referencial:</strong> Las relaciones entre tablas se establecen mediante <strong>Claves Foráneas (Foreign Keys - FK)</strong>. La regla exige que si una tupla en una tabla hija hace referencia a un valor en una tabla padre, dicho valor debe existir efectivamente en la clave primaria del padre o, de lo contrario, ser nulo (Date, 2019). Esto previene la existencia de registros huérfanos.
+        </li>
+        <li>
+          <strong>Integridad de Dominio:</strong> Los valores de una columna deben pertenecer estrictamente a su dominio asignado mediante tipos de datos nativos, valores por defecto (<code>DEFAULT</code>) y restricciones de validación condicional (<code>CHECK</code>).
+        </li>
+      </ul>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>SQL DDL - Ejemplo de Integridad</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>-- Ejemplo de definición rigurosa de integridad relacional
+CREATE TABLE departamentos (
+    id_departamento INT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE empleados (
+    id_empleado INT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL CHECK (salario > 0),
+    id_departamento INT NOT NULL,
+    -- Integridad referencial con eliminación en cascada restringida
+    CONSTRAINT fk_empleados_departamento 
+        FOREIGN KEY (id_departamento) 
+        REFERENCES departamentos(id_departamento)
+        ON UPDATE CASCADE 
+        ON DELETE RESTRICT
+);</code></pre>
+      </div>
+
+      <h2>3. El Estándar Transaccional ACID</h2>
+      <p>
+        El rasgo distintivo indiscutible de los motores relacionales es su garantía de transaccionalidad mediante el modelo <strong>ACID</strong>, introducido por Jim Gray (Gray, 1981):
+      </p>
+
+      <div class="callout warning">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          Las 4 Garantías Fundamentales de ACID
+        </div>
+        <ul>
+          <li><strong>Atomicidad (Atomicity):</strong> Principio del "todo o nada". Si una transacción bancaria debita $1,000,000 de la cuenta origen y el sistema colapsa antes de acreditarlos a la cuenta destino, el motor hace <em>ROLLBACK</em> automático y no aplica ningún cambio.</li>
+          <li><strong>Consistencia (Consistency):</strong> Una transacción solo puede transformar la base de datos de un estado válido a otro estado igualmente válido, respetando todas las reglas de integridad, disparadores (triggers) y restricciones lógicas.</li>
+          <li><strong>Aislamiento (Isolation):</strong> Las transacciones concurrentes se ejecutan sin interferir entre sí. Aunque ocurran miles por segundo, el resultado debe ser equivalente a haberlas ejecutado una después de otra de forma serial.</li>
+          <li><strong>Durabilidad (Durability):</strong> Una vez que una transacción ha recibido confirmación de <em>COMMIT</em>, sus efectos son permanentes y no se perderán incluso si sobreviene una caída de tensión catastrófica inmediatamente después.</li>
+        </ul>
+      </div>
+
+      <h3>Niveles de Aislamiento ANSI SQL y Fenómenos Concurrentes</h3>
+      <p>
+        Para equilibrar la velocidad de procesamiento con la pureza del aislamiento, el estándar SQL define cuatro niveles progresivos:
+      </p>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Nivel de Aislamiento</th>
+              <th>Lectura Sucia (Dirty Read)</th>
+              <th>Lectura No Repetible (Non-repeatable Read)</th>
+              <th>Lectura Fantasma (Phantom Read)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Read Uncommitted</strong></td>
+              <td>Permitida ⚠️</td>
+              <td>Permitida ⚠️</td>
+              <td>Permitida ⚠️</td>
+            </tr>
+            <tr>
+              <td><strong>Read Committed</strong> (Default en Postgres)</td>
+              <td>Prevenida ✅</td>
+              <td>Permitida ⚠️</td>
+              <td>Permitida ⚠️</td>
+            </tr>
+            <tr>
+              <td><strong>Repeatable Read</strong> (Default en MySQL)</td>
+              <td>Prevenida ✅</td>
+              <td>Prevenida ✅</td>
+              <td>Permitida / Mitigada ✅</td>
+            </tr>
+            <tr>
+              <td><strong>Serializable</strong> (Máxima rigidez)</td>
+              <td>Prevenida ✅</td>
+              <td>Prevenida ✅</td>
+              <td>Prevenida ✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"></path></svg>
+          Conclusión
+        </div>
+        <p>
+          Las bases de datos relacionales continúan siendo el estándar de oro en sistemas donde la integridad formal, la ausencia de ambigüedad y la consistencia inmediata son imperativas, tales como la contabilidad, la banca, la facturación electrónica y los sistemas de gestión empresarial (ERP / CRM).
+        </p>
+      </div>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Referencias Bibliográficas </h3>
+        <ul>
+          <li>Codd, E. F. (1970). A relational model of data for large shared data banks. <em>Communications of the ACM</em>, 13(6), 377–387. https://doi.org/10.1145/362384.362685</li>
+          <li>Date, C. J. (2019). <em>Database Design and Relational Theory: Normal Forms and All That Jazz</em> (2nd ed.). O'Reilly Media.</li>
+          <li>Gray, J. (1981). The transaction concept: Virtues and limitations. <em>Proceedings of the Seventh International Conference on Very Large Data Bases</em>, 144–154.</li>
+          <li>Silberschatz, A., Korth, H. F., & Sudarshan, S. (2020). <em>Database System Concepts</em> (7th ed.). McGraw-Hill Education.</li>
+        </ul>
+      </div>
+
+      <!-- Navigation links -->
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./motor-bd.html" class="read-more-link">&larr; Anterior: Motor de Bases de Datos</a>
+        <a href="./bd-no-relacional.html" class="read-more-link">Siguiente: Base de Datos No Relacional &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticia: PostgreSQL 17/18 y MySQL 9 en Alta Demanda | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Novedades arquitecturales de las últimas versiones de PostgreSQL y MySQL: gestión de memoria de vacuuming, ejecución SIMD y stored procedures en JavaScript.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link active">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke_linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#noticias">Noticias Globales</a>
+        <span>&rsaquo;</span>
+        <span>Entrada Cronológica #2</span>
+      </nav>
+      <span class="card-badge news">Open Source</span>
+      <h1 class="article-title">Evolución de los Gigantes de Código Abierto: PostgreSQL 17/18 y MySQL 9 en Escenarios de Alta Demanda</h1>
+      <div class="article-meta">
+        <span>Publicado: 20 de Enero de 2026</span>
+        <span>Lectura estimada: 7 min</span>
+        <span>Por: Redacción Tecnológica &bull; Universidad EAN</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        El ecosistema de motores de bases de datos relacionales de código abierto vive uno de sus momentos más dinámicos e innovadores. Con el lanzamiento consolidado de <strong>PostgreSQL 17</strong> (y los avances de su ciclo 18) y el despliegue general de la serie de innovación <strong>MySQL 9</strong>, los dos motores más populares de la web han introducido saltos tecnológicos sin precedentes enfocados en la eficiencia de cómputo en la nube y el aprovechamiento del hardware moderno.
+      </p>
+
+      <h2>1. El Salto Cuántico en PostgreSQL 17: Rediseño del Vacuuming y Aceleración SIMD</h2>
+      <p>
+        Históricamente, uno de los desafíos más temidos por los administradores de PostgreSQL (DBAs) en bases de datos con cientos de millones de registros era el impacto del proceso de <em>Vacuum</em> (la recolección y limpieza de tuplas muertas originadas por MVCC).
+      </p>
+
+      <p>
+        La versión 17 revolucionó este mecanismo introduciendo una <strong>nueva estructura interna de memoria adaptativa</strong> para el proceso de aspirado, logrando reducir el consumo de memoria RAM hasta en un <strong>90% (hasta 20 veces menos consumo)</strong> en operaciones intensivas. Esto permite que el mantenimiento de tablas de terabytes se complete en una fracción del tiempo habitual sin estrangular el ancho de banda del subsistema de disco.
+      </p>
+
+      <div class="callout success">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"></path></svg>
+          Optimizaciones Clave en Postgres:
+        </div>
+        <ul>
+          <li><strong>Vectorización SIMD en el CPU:</strong> Aprovechamiento de instrucciones vectoriales AVX-512 a nivel de procesador para acelerar funciones como <code>bit_count</code> y cálculos agregados masivos.</li>
+          <li><strong>Replicación Lógica Simplificada:</strong> Conservación automática de slots de replicación lógica durante actualizaciones de versión mayor mediante <code>pg_upgrade</code>, eliminando las tediosas recreaciones de réplicas en clústeres de alta disponibilidad.</li>
+        </ul>
+      </div>
+
+      <h2>2. MySQL 9: JavaScript Nativo en el Núcleo del Motor</h2>
+      <p>
+        Por su parte, Oracle presentó con la familia MySQL 9 una de las características más esperadas por la comunidad de desarrolladores modernos: <strong>soporte nativo para Stored Procedures y Funciones escritas directamente en JavaScript (ECMAScript)</strong> ejecutadas dentro del propio motor mediante el motor de bajo nivel GraalVM.
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>MySQL 9 Stored Function in JavaScript</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>-- Declaración de función almacenada usando sintaxis moderna JavaScript en MySQL 9
+CREATE FUNCTION calcular_descuento_dinamico(monto DOUBLE, antiguedad_anios INT) 
+RETURNS DOUBLE LANGUAGE JAVASCRIPT AS $$
+  if (antiguedad_anios > 5) {
+    return monto * 0.85; // 15% de descuento para clientes preferenciales
+  } else if (antiguedad_anios > 2) {
+    return monto * 0.92; // 8% de descuento
+  }
+  return monto;
+$$;</code></pre>
+      </div>
+
+      <p>
+        Esta funcionalidad permite a los equipos de desarrollo reutilizar bibliotecas y lógica de validación de negocio escritas en JavaScript sin necesidad de aprender las peculiaridades de sintaxis procedimental tradicional de SQL, manteniendo tiempos de ejecución ultrarrápidos al procesarse directamente junto a los datos.
+      </p>
+
+      <h2>3. Implicaciones para la Arquitectura de Software</h2>
+      <p>
+        Estas evoluciones demuestran que los motores de código abierto ya no compiten únicamente por paridad de funciones contra los proveedores comerciales, sino que están marcando el ritmo de la vanguardia tecnológica mundial, ofreciendo a las organizaciones una alternativa madura, de costo predecible y sin ataduras propietarias (<em>Vendor Lock-in</em>).
+      </p>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Fuentes y Referencias</h3>
+        <ul>
+          <li>Oracle Corporation. (2025). <em>What is New in MySQL 9: Innovations in Developer Productivity</em>. MySQL Documentation.</li>
+          <li>PostgreSQL Global Development Group. (2024). <em>PostgreSQL 17 Release Notes: Vacuuming Overhaul and Performance Boost</em>. postgresql.org.</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./noticia-1-vector-databases.html" class="read-more-link">&larr; Anterior: Bases de Datos Vectoriales</a>
+        <a href="./noticia-3-arquitecturas-htap.html" class="read-more-link">Siguiente Noticia: Arquitecturas HTAP &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

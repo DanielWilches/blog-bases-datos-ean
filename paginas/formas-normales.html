@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué formas normales existen? (1FN a 5FN) | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Guía completa de las formas normales: 1FN, 2FN, 3FN, BCNF, 4FN y 5FN con un caso práctico de normalización paso a paso para sistemas de información.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link active">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#temas-academicos">Temas Académicos</a>
+        <span>&rsaquo;</span>
+        <span>Tema 8: Formas Normales</span>
+      </nav>
+      <span class="card-badge normalization">Algoritmos de Diseño</span>
+      <h1 class="article-title">¿Qué formas normales existen? Estudio de 1FN a 5FN y Caso Práctico</h1>
+      <div class="article-meta">
+        <span>Publicado: Febrero 2026</span>
+        <span>Lectura estimada: 10 min</span>
+        <span>Área: Teoría de Bases de Datos & Álgebra Relacional</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        Las <strong>formas normales</strong> son criterios progresivos y matemáticamente verificables que miden el grado de resistencia de un esquema relacional frente a las redundancias y anomalías de diseño (Codd, 1971). Se organizan de forma acumulativa: cada nivel superior exige cumplir de forma estricta todas las condiciones de los niveles precedentes.
+      </p>
+
+      <h2>1. Definición Teórica de Cada Forma Normal</h2>
+
+      <h3>1. Primera Forma Normal (1FN) — Atomicidad</h3>
+      <p>
+        Una relación está en 1FN si y solo si:
+      </p>
+      <ul>
+        <li>Todos los atributos son <strong>atómicos e indivisibles</strong> (no existen listas separadas por comas, arrays ni tuplas anidadas dentro de una celda).</li>
+        <li>No existen <strong>grupos repetitivos</strong> de columnas (por ejemplo, tener <code>telefono_1</code>, <code>telefono_2</code>, <code>telefono_3</code>).</li>
+        <li>Existe una <strong>clave primaria</strong> claramente definida.</li>
+      </ul>
+
+      <h3>2. Segunda Forma Normal (2FN) — Dependencia Funcional Completa</h3>
+      <p>
+        Una relación está en 2FN si está en 1FN y <strong>ningún atributo no clave depende parcialmente de una parte de la clave primaria compuesta</strong>. Es decir, todos los atributos que no forman parte de la PK deben depender de la clave primaria en su totalidad. (Nota: si la tabla tiene una clave primaria simple de un solo campo, ya se encuentra automáticamente en 2FN).
+      </p>
+
+      <h3>3. Tercera Forma Normal (3FN) — No Dependencia Transitiva</h3>
+      <p>
+        Una relación está en 3FN si está en 2FN y <strong>no contiene dependencias funcionales transitivas</strong>. Esto significa que ningún atributo no clave debe depender funcionalmente de otro atributo no clave (es decir, que no ocurra <i>X</i> &rarr; <i>Y</i> y <i>Y</i> &rarr; <i>Z</i>, donde <i>X</i> es la clave primaria e <i>Y, Z</i> son atributos no clave) (Elmasri & Navathe, 2016).
+      </p>
+
+      <div class="callout info">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          La Regla Mnemotécnica de Bill Kent (1983)
+        </div>
+        <p>
+          <em>"Cada atributo no clave debe proporcionar un hecho sobre la clave, sobre toda la clave, y nada más que sobre la clave (con la ayuda de Codd)."</em> Esta famosa frase resume con elegancia la 1FN (hecho atómico), la 2FN (toda la clave) y la 3FN (nada más que sobre la clave).
+        </p>
+      </div>
+
+      <h3>4. Forma Normal de Boyce-Codd (BCNF)</h3>
+      <p>
+        Introducida por Raymond F. Boyce y Edgar F. Codd en 1974 como una versión más estricta de la 3FN. Aplica cuando una tabla posee múltiples claves candidatas solapadas o compuestas. Su condición es simple: <strong>para toda dependencia funcional no trivial <i>X</i> &rarr; <i>Y</i>, el determinante <i>X</i> debe ser necesariamente una superclave</strong>.
+      </p>
+
+      <h3>5. Cuarta Forma Normal (4FN) — Dependencias Multivaluadas</h3>
+      <p>
+        Formulada por Ronald Fagin (1977). Erradica las <strong>dependencias multivaluadas independientes</strong> (notadas formalmente como <i>X</i> &#x219E; <i>Y</i>, donde <i>X</i> multidetermina a <i>Y</i>). Por ejemplo, si un profesor imparte varios cursos y a la vez domina varios idiomas extranjeros independientes entre sí, cruzar cursos e idiomas en la misma tabla genera un producto cartesiano inflado de filas innecesarias. La 4FN exige separar los cursos y los idiomas en tablas disjuntas.
+      </p>
+
+      <h3>6. Quinta Forma Normal (5FN / PJNF) — Dependencia de Proyección-Reunión</h3>
+      <p>
+        Llamada también <em>Projection-Join Normal Form</em>. Aplica cuando una relación no puede descomponerse en dos tablas sin perder información, pero sí puede descomponerse en tres o más tablas con restricciones cíclicas interdependientes. En la práctica del desarrollo de software rara vez se llega formalmente hasta la 5FN debido a la complejidad de las reglas de negocio involucradas.
+      </p>
+
+      <h2>2. Caso Práctico Paso a Paso: Normalización de una Factura de Venta</h2>
+      <p>
+        Supongamos que una empresa comienza con una única hoja de cálculo desordenada (tabla no normalizada) para registrar sus ventas comerciales:
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>Tabla No Normalizada (Esquema Original)</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>FACTURA_DESORDENADA (
+    NumeroFactura, Fecha, ID_Cliente, NombreCliente, CiudadCliente,
+    Lista_Productos, -- [Error 1FN: valores múltiples como "Laptop 16GB, Mouse, Teclado"]
+    Cantidades, PreciosUnitarios
+)</code></pre>
+      </div>
+
+      <!-- Paso 1FN -->
+      <h3>Paso 1: Aplicación de la 1FN</h3>
+      <p>
+        Descomponemos las listas separadas por comas en filas atómicas individuales y definimos la clave primaria compuesta: <code>(NumeroFactura, CodigoProducto)</code>.
+      </p>
+      <div class="code-block">
+        <div class="code-header">
+          <span>Esquema en 1FN</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>VENTAS_1FN (
+    <u>NumeroFactura</u>, Fecha, ID_Cliente, NombreCliente, CiudadCliente,
+    <u>CodigoProducto</u>, DescripcionProducto, PrecioUnitario, Cantidad
+)</code></pre>
+      </div>
+
+      <!-- Paso 2FN -->
+      <h3>Paso 2: Aplicación de la 2FN</h3>
+      <p>
+        Analizamos las dependencias con respecto a la clave compuesta <code>(NumeroFactura, CodigoProducto)</code>:
+      </p>
+      <ul>
+        <li><code>Fecha, ID_Cliente, NombreCliente, CiudadCliente</code> dependen <strong>únicamente</strong> de <code>NumeroFactura</code> (dependencia parcial).</li>
+        <li><code>DescripcionProducto, PrecioUnitario</code> dependen <strong>únicamente</strong> de <code>CodigoProducto</code> (dependencia parcial).</li>
+        <li><code>Cantidad</code> depende de <strong>ambos</strong>: qué producto y en cuál factura (dependencia total).</li>
+      </ul>
+      <p>Descomponemos en tres tablas para alcanzar la 2FN:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span>Esquemas en 2FN</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>FACTURAS_2FN (<u>NumeroFactura</u>, Fecha, ID_Cliente, NombreCliente, CiudadCliente)
+PRODUCTOS_2FN (<u>CodigoProducto</u>, DescripcionProducto, PrecioUnitario)
+DETALLE_FACTURA_2FN (<u>NumeroFactura</u>, <u>CodigoProducto</u>, Cantidad)</code></pre>
+      </div>
+
+      <!-- Paso 3FN -->
+      <h3>Paso 3: Aplicación de la 3FN</h3>
+      <p>
+        Revisamos la tabla <code>FACTURAS_2FN</code>. Su clave primaria es <code>NumeroFactura</code>. Observamos la dependencia transitiva:
+        <br>
+        <code>NumeroFactura &rarr; ID_Cliente</code> y a su vez <code>ID_Cliente &rarr; NombreCliente, CiudadCliente</code>.
+        <br>
+        Los atributos <code>NombreCliente</code> y <code>CiudadCliente</code> dependen de otro campo no clave. Separamos al Cliente en su propia entidad:
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>Esquema Final en 3FN (SQL DDL Óptimo)</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>-- 1. Tabla Clientes (3FN)
+CREATE TABLE clientes (
+    id_cliente INT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    ciudad VARCHAR(50) NOT NULL
+);
+
+-- 2. Tabla Productos (3FN)
+CREATE TABLE productos (
+    codigo_producto VARCHAR(20) PRIMARY KEY,
+    descripcion VARCHAR(150) NOT NULL,
+    precio_unitario DECIMAL(10, 2) NOT NULL
+);
+
+-- 3. Tabla Facturas (Encabezado) (3FN)
+CREATE TABLE facturas (
+    numero_factura INT PRIMARY KEY,
+    fecha DATE NOT NULL,
+    id_cliente INT NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+);
+
+-- 4. Tabla Detalle de Factura (Líneas de venta) (3FN)
+CREATE TABLE detalle_factura (
+    numero_factura INT NOT NULL,
+    codigo_producto VARCHAR(20) NOT NULL,
+    cantidad INT NOT NULL CHECK (cantidad > 0),
+    PRIMARY KEY (numero_factura, codigo_producto),
+    FOREIGN KEY (numero_factura) REFERENCES facturas(numero_factura),
+    FOREIGN KEY (codigo_producto) REFERENCES productos(codigo_producto)
+);</code></pre>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"></path></svg>
+          Resultado del Ejercicio
+        </div>
+        <p>
+          El esquema final en <strong>3FN</strong> elimina por completo la redundancia de datos del cliente y de los productos, protege el sistema contra las anomalías de borrado e inserción, y asegura integridad referencial absoluta mediante restricciones de base de datos declarativas.
+        </p>
+      </div>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Referencias Bibliográficas </h3>
+        <ul>
+          <li>Codd, E. F. (1971). Further normalization of the data base relational model. <em>Courant Computer Science Symposia 6: Data Base Systems</em>, Prentice-Hall.</li>
+          <li>Fagin, R. (1977). Multivalued dependencies and a new normal form for relational databases. <em>ACM Transactions on Database Systems (TODS)</em>, 2(3), 262–278.</li>
+          <li>Kent, W. (1983). A simple guide to five normal forms in relational database theory. <em>Communications of the ACM</em>, 26(2), 120–125. https://doi.org/10.1145/358024.358054</li>
+          <li>Silberschatz, A., Korth, H. F., & Sudarshan, S. (2020). <em>Database System Concepts</em> (7th ed.). McGraw-Hill Education.</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./normalizacion.html" class="read-more-link">&larr; Anterior: Qué es la Normalización</a>
+        <a href="./seguridad-bd.html" class="read-more-link">Siguiente: Estrategias de Seguridad &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

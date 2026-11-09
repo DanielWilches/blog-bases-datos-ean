@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motores Relacionales Open Source Más Utilizados | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Estudio comparativo de los grandes motores relacionales de código abierto: PostgreSQL, MySQL, MariaDB y SQLite. Tipos de licencias y arquitectura.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link active">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke_linecap="round" stroke_linejoin="round" stroke_width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#temas-academicos">Temas Académicos</a>
+        <span>&rsaquo;</span>
+        <span>Tema 6: Motores Open Source</span>
+      </nav>
+      <span class="card-badge relational">Código Abierto</span>
+      <h1 class="article-title">¿Cuáles son los motores de bases de datos relacionales Open Source?</h1>
+      <div class="article-meta">
+        <span>Publicado: Febrero 2026</span>
+        <span>Lectura estimada: 8 min</span>
+        <span>Área: Software Libre & Arquitectura de Software</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        El ecosistema del software libre y de código abierto (<em>Open Source</em>) ha revolucionado por completo la industria de los datos. Lo que hace tres décadas eran proyectos universitarios o alternativas secundarias frente a las corporaciones propietarias, hoy son los motores más robustos, innovadores y masivamente desplegados en internet, soportando desde startups emergentes hasta gigantes de la tecnología como Uber, Netflix, Spotify y Meta (Stonebraker, 2010).
+      </p>
+
+      <h2>1. Los Cuatro Motores Relacionales Open Source Líderes</h2>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Motor</th>
+              <th>Licencia de Software</th>
+              <th>Modelo Arquitectural</th>
+              <th>Puntos Fuertes Destacados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PostgreSQL</strong></td>
+              <td>Licencia PostgreSQL (Similar a MIT/BSD)</td>
+              <td>Cliente/Servidor, Objeto-Relacional (ORDBMS), Procesos independientes por conexión.</td>
+              <td>Cumplimiento SQL más estricto del mercado, soporte JSONB nativo con índices GIN, extensibilidad sin límites (PostGIS, pgvector, Citus).</td>
+            </tr>
+            <tr>
+              <td><strong>MySQL</strong></td>
+              <td>GPL v2 / Comercial dual (Oracle)</td>
+              <td>Cliente/Servidor, Modelo multihilo con un hilo por conexión, Motores conectables.</td>
+              <td>El motor que construyó la web (Stack LAMP), sencillez operativa, altísima velocidad en lecturas OLTP masivas con InnoDB.</td>
+            </tr>
+            <tr>
+              <td><strong>MariaDB</strong></td>
+              <td>GPL v2 (Comunidad / MariaDB Foundation)</td>
+              <td>Cliente/Servidor, Fork 100% abierto de MySQL fundado por Monty Widenius.</td>
+              <td>Independencia total de Oracle, motores de almacenamiento analítico avanzados (ColumnStore), soporte para sintaxis PL/SQL.</td>
+            </tr>
+            <tr>
+              <td><strong>SQLite</strong></td>
+              <td>Dominio Público (Public Domain)</td>
+              <td>Embebido en proceso (In-Process), sin servidor de red, un solo archivo binario en disco.</td>
+              <td>Cero configuración, biblioteca en lenguaje C con huella de memoria minúscula, presente en miles de millones de teléfonos y aplicaciones.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Análisis Técnico de Cada Plataforma</h2>
+
+      <h3>A. PostgreSQL: El Motor Objeto-Relacional Más Avanzado</h3>
+      <p>
+        Con origen en el proyecto <em>POSTGRES</em> liderado por Michael Stonebraker en la Universidad de California en Berkeley en 1986, PostgreSQL es considerado por la comunidad científica como el motor de código abierto más sofisticado y riguroso del mundo (Momjian, 2001).
+      </p>
+      <ul>
+        <li><strong>Extensibilidad Absoluta:</strong> Gracias a su arquitectura abierta, los desarrolladores pueden crear tipos de datos propios, operadores y métodos de indexación. Por ejemplo, la extensión <strong>PostGIS</strong> convierte a PostgreSQL en el estándar mundial para sistemas de información geográfica (SIG), mientras que <strong>pgvector</strong> lo ha transformado en el motor preferido para albergar vectores de IA.</li>
+        <li><strong>Potencia JSONB:</strong> Almacena documentos JSON semiestructurados en formato binario indexable, unificando en una sola base de datos las ventajas del modelo relacional con las de un motor NoSQL como MongoDB.</li>
+      </ul>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>PostgreSQL DDL & JSONB Queries</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>-- Tabla relacional con columna semiestructurada JSONB
+CREATE TABLE sensores_iot (
+    id_sensor SERIAL PRIMARY KEY,
+    ubicacion VARCHAR(100) NOT NULL,
+    telemetria JSONB NOT NULL,
+    fecha_registro TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear un índice GIN sobre el JSON para búsquedas sub-milisegundo
+CREATE INDEX idx_sensores_telemetria ON sensores_iot USING GIN (telemetria);
+
+-- Consultar registros donde la temperatura supere los 35°C dentro del JSON
+SELECT id_sensor, ubicacion, telemetria->>'temperatura' AS temp
+FROM sensores_iot
+WHERE (telemetria->>'temperatura')::numeric > 35.0;</code></pre>
+      </div>
+
+      <h3>B. MySQL: El Rey del Desarrollo Web</h3>
+      <p>
+        Impulsó la era dorada de internet como la 'M' del stack <strong>LAMP</strong> (Linux, Apache, MySQL, PHP). Hoy en día, su motor de almacenamiento por defecto, <strong>InnoDB</strong>, proporciona soporte transaccional ACID completo, bloqueos a nivel de fila y claves foráneas. Es el núcleo de bases de datos que sostiene a WordPress, Drupal, Shopify y Meta en sus capas web (Schwartz et al., 2012).
+      </p>
+
+      <h3>C. MariaDB: La Resistencia de la Comunidad</h3>
+      <p>
+        Nació en 2009 cuando Sun Microsystems (que había adquirido MySQL) fue absorbida por Oracle. Para garantizar que siempre existiera una versión verdaderamente libre, el creador original de MySQL lideró este fork. Destaca por incorporar motores como <em>ColumnStore</em> (para procesamiento analítico de Big Data) y motores de clustering multimaestro como <em>Galera Cluster</em>.
+      </p>
+
+      <h3>D. SQLite: La Base de Datos Embebida Universal</h3>
+      <p>
+        Diseñada por D. Richard Hipp en el año 2000, SQLite no corre como un servicio daemon separado en un puerto de red (como 5432 o 3306), sino que se compila directamente dentro de la aplicación como una librería en C. Toda la base de datos (tablas, índices, disparadores y datos) reside en un único archivo físico en disco (<code>.db</code> o <code>.sqlite</code>).
+      </p>
+
+      <div class="callout info">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          ¿Sabías que SQLite es el motor de software más distribuido de la historia?
+        </div>
+        <p>
+          Se estima que existen más de <strong>1 billón de bases de datos SQLite activas</strong> en el mundo. Cada smartphone Android e iPhone cuenta con docenas de bases de datos SQLite operando en segundo plano para guardar contactos, llamadas, historiales de WhatsApp y preferencias de aplicaciones.
+        </p>
+      </div>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Referencias Bibliográficas </h3>
+        <ul>
+          <li>Momjian, B. (2001). <em>PostgreSQL: Introduction and Concepts</em>. Addison-Wesley.</li>
+          <li>Schwartz, B., Zaitsev, P., & Tkachenko, V. (2012). <em>High Performance MySQL: Optimization, Backups, and Replication</em> (3rd ed.). O'Reilly Media.</li>
+          <li>Stonebraker, M. (2010). SQL databases v. NoSQL databases. <em>Communications of the ACM</em>, 53(4), 10–11. https://doi.org/10.1145/1721654.1721659</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./motores-licenciados.html" class="read-more-link">&larr; Anterior: Motores Licenciados</a>
+        <a href="./normalizacion.html" class="read-more-link">Siguiente: Normalización de Bases de Datos &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criterios para Estrategias de Seguridad en Bases de Datos | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Pilares de seguridad en bases de datos: control de acceso RBAC, cifrado TDE/TLS, prevención de SQL Injection, RPO/RTO y cumplimiento de la Ley 1581 y GDPR.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link active">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#temas-academicos">Temas Académicos</a>
+        <span>&rsaquo;</span>
+        <span>Tema 9: Ciberseguridad en Datos</span>
+      </nav>
+      <span class="card-badge security">Ciberseguridad</span>
+      <h1 class="article-title">¿Qué criterios se deben tener en cuenta para establecer estrategias de seguridad en bases de datos?</h1>
+      <div class="article-meta">
+        <span>Publicado: Febrero 2026</span>
+        <span>Lectura estimada: 9 min</span>
+        <span>Área: Seguridad de la Información & Cumplimiento</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        Los datos constituyen el activo estratégico y patrimonial más valioso de cualquier organización moderna. Una brecha de seguridad no solo acarrea pérdidas financieras millonarias y sanciones regulatorias draconianas, sino la destrucción irreparable de la reputación institucional (NIST, 2020).
+      </p>
+
+      <p>
+        Para proteger eficazmente un motor de bases de datos contra ataques cibernéticos, fugas internas de información y desastres físicos, los ingenieros de sistemas deben estructurar una <strong>estrategia de defensa en profundidad</strong> basada en seis pilares fundamentales:
+      </p>
+
+      <h2>1. Los 6 Pilares de la Seguridad en Bases de Datos</h2>
+
+      <!-- Tabla de Pilares -->
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Pilar Estratégico</th>
+              <th>Mecanismo Técnico</th>
+              <th>Objetivo de Protección</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Autenticación & RBAC</strong></td>
+              <td>Autenticación multifactor (MFA), Control de Acceso Basado en Roles (RBAC), Principio de Menor Privilegio (PoLP).</td>
+              <td>Garantizar que cada usuario o microservicio acceda únicamente a las tablas y operaciones estrictamente indispensables para su función.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Cifrado End-to-End</strong></td>
+              <td>Cifrado en reposo (TDE / AES-256), Cifrado en tránsito (TLS 1.3), Cifrado de columnas sensibles (hashing salteado Argon2/bcrypt).</td>
+              <td>Inutilizar los datos ante robos de discos físicos, capturas de tráfico en red o accesos no autorizados a copias de seguridad.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Prevención de Inyección SQL</strong></td>
+              <td>Prepared Statements obligatorios, validación y sanitización estricta de entradas en capa backend, WAF (Web Application Firewall).</td>
+              <td>Eliminar la vulnerabilidad crítica #1 de aplicaciones de bases de datos según el ranking OWASP Top 10.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Auditoría y Trazabilidad</strong></td>
+              <td>Database Activity Monitoring (DAM), logs inmutables, alertas automáticas de anomalías de consulta y accesos privilegiados.</td>
+              <td>Disponer de evidencia forense irrefutable ante incidentes y cumplir con requerimientos de no repudio.</td>
+            </tr>
+            <tr>
+              <td><strong>5. Respaldo y Resiliencia (DRP)</strong></td>
+              <td>Definición rigurosa de RPO y RTO, backups completos + incrementales de WAL, réplicas geodistribuidas y simulacros de restauración.</td>
+              <td>Garantizar la continuidad operativa del negocio ante ataques de ransomware, fallos de hardware o catástrofes naturales.</td>
+            </tr>
+            <tr>
+              <td><strong>6. Cumplimiento Regulatorio</strong></td>
+              <td>Ley Estatutaria 1581 de 2012 (Habeas Data en Colombia), GDPR (UE), PCI-DSS (Tarjetas de crédito).</td>
+              <td>Asegurar el tratamiento lícito, confidencial y consentido de los datos personales de ciudadanos y clientes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Prevención Práctica de SQL Injection: Código Vulnerable vs. Seguro</h2>
+      <p>
+        La inyección SQL (SQLi) ocurre cuando el código concatena directamente texto provisto por el usuario dentro de una instrucción SQL, permitiendo a un atacante alterar la lógica del comando para eludir autenticaciones o extraer la totalidad de la base de datos (OWASP, 2021).
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>❌ Código Vulnerable a SQL Injection (Inseguro)</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>// PELIGRO: Concatenación directa de entradas de usuario
+String userEmail = request.getParameter("email");
+String userPass  = request.getParameter("password");
+
+// Si el atacante escribe en email: admin' OR '1'='1' --
+String sql = "SELECT * FROM usuarios WHERE email = '" + userEmail + "' AND password = '" + userPass + "'";
+Statement stmt = connection.createStatement();
+ResultSet rs = stmt.executeQuery(sql); // ¡Atacante autenticado sin credenciales!</code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>✅ Código Seguro con Consultas Parametrizadas (Prepared Statements)</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>// CORRECTO: La entrada del usuario se envía separada del plan de ejecución
+String sql = "SELECT id_usuario, password_hash, rol FROM usuarios WHERE email = ?";
+PreparedStatement pstmt = connection.prepareStatement(sql);
+pstmt.setString(1, userEmail); // El motor trata el valor como dato puro, jamás como código ejecutable
+ResultSet rs = pstmt.executeQuery();
+
+if (rs.next()) {
+    String hashAlmacenado = rs.getString("password_hash");
+    // Verificación criptográfica segura de la contraseña mediante Argon2 o BCrypt
+    if (PasswordVerifier.verify(userPass, hashAlmacenado)) {
+        // Acceso concedido legalmente
+    }
+}</code></pre>
+      </div>
+
+      <h2>3. Continuidad del Negocio: Métricas RPO y RTO</h2>
+      <p>
+        Cualquier política técnica de respaldo debe definirse en función de dos métricas del negocio:
+      </p>
+      <ul>
+        <li>
+          <strong>RPO (<em>Recovery Point Objective</em> — Objetivo de Punto de Recuperación):</strong> La cantidad máxima de tiempo de datos que la organización está dispuesta a perder en caso de incidente. En sistemas bancarios, el RPO debe ser cero segundos (cero pérdida de transacciones).
+        </li>
+        <li>
+          <strong>RTO (<em>Recovery Time Objective</em> — Objetivo de Tiempo de Recuperación):</strong> El tiempo máximo admisible que los sistemas pueden tardar en estar nuevamente operativos después de una caída.
+        </li>
+      </ul>
+
+      <div class="callout success">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"></path></svg>
+          Marco Regulatorio en Colombia (Ley 1581 de 2012)
+        </div>
+        <p>
+          En Colombia, la <strong>Ley 1581 de 2012</strong> y el Decreto 1377 de 2013 regulan el Régimen General de Protección de Datos Personales. La Superintendencia de Industria y Comercio (SIC) exige a todas las entidades públicas y privadas implementar el Registro Nacional de Bases de Datos (RNBD), establecer medidas técnicas de seguridad verificables para evitar la adulteración o pérdida de datos sensibles, y reportar cualquier brecha o incidente de seguridad en un plazo no mayor a 15 días hábiles.
+        </p>
+      </div>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Referencias Bibliográficas </h3>
+        <ul>
+          <li>Congreso de la República de Colombia. (2012). <em>Ley Estatutaria 1581 de 2012 por la cual se dictan disposiciones generales para la protección de datos personales</em>. Diario Oficial No. 48.587.</li>
+          <li>National Institute of Standards and Technology [NIST]. (2020). <em>Security and Privacy Controls for Information Systems and Organizations</em> (Special Publication 800-53, Rev. 5). U.S. Department of Commerce. https://doi.org/10.6028/NIST.SP.800-53r5</li>
+          <li>Open Web Application Security Project [OWASP]. (2021). <em>OWASP Top 10: The Ten Most Critical Web Application Security Risks</em>. OWASP Foundation. https://owasp.org/Top10/</li>
+          <li>Stallings, W. (2018). <em>Effective Cybersecurity: A Guide to Using Best Practices and Standards</em>. Addison-Wesley.</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./formas-normales.html" class="read-more-link">&larr; Anterior: Formas Normales</a>
+        <a href="../noticias/noticia-1-vector-databases.html" class="read-more-link">Ver Noticias: Bases de Datos Vectoriales &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

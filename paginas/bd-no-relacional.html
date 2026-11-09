@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué es una base de datos no relacional? | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Origen, filosofía del movimiento NoSQL, arquitectura sin esquema, el Teorema CAP de Brewer y el modelo BASE de consistencia eventual.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link active">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#temas-academicos">Temas Académicos</a>
+        <span>&rsaquo;</span>
+        <span>Tema 3: Base de Datos No Relacional</span>
+      </nav>
+      <span class="card-badge nosql">Paradigma NoSQL</span>
+      <h1 class="article-title">¿Qué es una base de datos no relacional?</h1>
+      <div class="article-meta">
+        <span>Publicado: Febrero 2026</span>
+        <span>Lectura estimada: 7 min</span>
+        <span>Área: Sistemas Distribuidos & Big Data</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        Hacia finales de la primera década del siglo XXI, la explosión de la Web 2.0, las redes sociales masivas y el procesamiento de terabytes de eventos por segundo (encabezados por gigantes como Google, Amazon y Facebook) enfrentaron a las bases de datos relacionales tradicionales con un cuello de botella crítico: <strong>la dificultad para escalar horizontalmente de manera económica</strong> manteniendo la consistencia ACID estricta y los bloqueos distribuidos (Sadalage & Fowler, 2012).
+      </p>
+
+      <p>
+        De este desafío emergió el movimiento conocido como <strong>NoSQL</strong> (hoy interpretado mayoritariamente como <em>"Not Only SQL"</em>). Una base de datos no relacional es un sistema de almacenamiento y gestión de información diseñado expresamente para manejar volúmenes astronómicos de datos distribuidos, alta velocidad de ingesta, esquemas dinámicos o no estructurados y requisitos de escalamiento horizontal lineal.
+      </p>
+
+      <h2>1. Rasgos Arquitecturales Distintivos</h2>
+      <ul>
+        <li>
+          <strong>Esquema Flexible (<em>Schema-on-Read / Schema-free</em>):</strong> A diferencia del modelo relacional donde cada columna debe declararse antes de insertar un registro (<em>Schema-on-Write</em>), en las bases NoSQL cada documento o registro puede contener atributos distintos sin alterar una definición global rígida.
+        </li>
+        <li>
+          <strong>Escalabilidad Horizontal (<em>Scale-Out</em>):</strong> Para soportar más tráfico, no se requiere comprar un servidor mainframe o un supercomputador excesivamente costoso (<em>Scale-Up</em>). En su lugar, el clúster se expande agregando nodos genéricos (máquinas virtuales estándar en la nube) que se reparten los datos de forma transparente mediante <strong>particionamiento distribuido (<em>Sharding</em>)</strong>.
+        </li>
+        <li>
+          <strong>Desnormalización por Diseño:</strong> Dado que realizar operaciones <code>JOIN</code> entre servidores físicamente separados a través de la red degrada catastróficamente la latencia, los modelos NoSQL tienden a almacenar los datos relacionados embebidos dentro de la misma estructura de datos (por ejemplo, los ítems de un pedido dentro del documento del pedido).
+        </li>
+      </ul>
+
+      <h2>2. El Teorema CAP de Eric Brewer</h2>
+      <p>
+        El pilar teórico fundamental que explica por qué nacieron las bases de datos no relacionales es el <strong>Teorema CAP</strong>, formulado por el profesor Eric Brewer en la Universidad de California en Berkeley (Brewer, 2000; Gilbert & Lynch, 2002).
+      </p>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 650 320" style="max-width:100%; height:auto;" xmlns="http://www.w3.org/2000/svg">
+          <!-- Triángulo CAP -->
+          <polygon points="325,40 100,270 550,270" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="6,6"/>
+          
+          <!-- Vértices -->
+          <circle cx="325" cy="40" r="30" fill="#2563eb"/>
+          <text x="325" y="45" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+          <text x="325" y="90" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Consistencia (Consistency)</text>
+          <text x="325" y="106" font-family="Inter, sans-serif" font-size="11" fill="var(--text-muted)" text-anchor="middle">Todos los nodos leen el mismo dato exacto al mismo tiempo</text>
+
+          <circle cx="100" cy="270" r="30" fill="#059669"/>
+          <text x="100" y="275" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+          <text x="110" y="308" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Disponibilidad (Availability)</text>
+
+          <circle cx="550" cy="270" r="30" fill="#d97706"/>
+          <text x="550" y="275" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">P</text>
+          <text x="540" y="308" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Tolerancia a Particiones (Partition)</text>
+
+          <!-- Aristas con clasificación -->
+          <rect x="140" y="120" width="130" height="35" rx="6" fill="#eff6ff" stroke="#3b82f6"/>
+          <text x="205" y="142" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1e40af" text-anchor="middle">Sistemas CA (RDBMS)</text>
+
+          <rect x="380" y="120" width="130" height="35" rx="6" fill="#eff6ff" stroke="#3b82f6"/>
+          <text x="445" y="142" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1e40af" text-anchor="middle">Sistemas CP (HBase, MongoDB)</text>
+
+          <rect x="260" y="250" width="130" height="35" rx="6" fill="#eff6ff" stroke="#3b82f6"/>
+          <text x="325" y="272" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1e40af" text-anchor="middle">Sistemas AP (Cassandra, Dynamo)</text>
+        </svg>
+        <p class="diagram-caption">Figura 2: Teorema CAP. En presencia de una partición de red inevitable (P), se debe elegir entre Consistencia (CP) o Disponibilidad (AP).</p>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          La Regla Inviolable del Teorema CAP
+        </div>
+        <p>
+          En cualquier sistema informático distribuido comunicado por una red física, las particiones de red (cortes de fibra, latencias extremas o fallos de conmutadores) son inevitables. Por consiguiente, <strong>un sistema distribuido nunca puede evadir la Tolerancia a Particiones (P)</strong>. La decisión arquitectónica real siempre es una disyuntiva:
+        </p>
+        <ul>
+          <li><strong>Si se elige CP (Consistencia + Tolerancia a Partición):</strong> Ante una partición de red, el sistema bloquea temporalmente las operaciones a los clientes para no entregar datos desactualizados (sacrifica disponibilidad temporalmente).</li>
+          <li><strong>Si se elige AP (Disponibilidad + Tolerancia a Partición):</strong> Cada nodo continúa respondiendo a los clientes de inmediato aunque esté incomunicado, pero asume que temporalmente distintos usuarios pueden ver versiones ligeramente desfasadas de la información (sacrifica consistencia inmediata).</li>
+        </ul>
+      </div>
+
+      <h2>3. La Filosofía BASE vs. ACID</h2>
+      <p>
+        Para respaldar la operación en modo AP o con alta disponibilidad, las bases de datos no relacionales sustituyen el rigor de ACID por el modelo <strong>BASE</strong> (Pritchett, 2008):
+      </p>
+
+      <ul>
+        <li><strong>Basically Available (Básicamente Disponible):</strong> El clúster garantiza una respuesta a las solicitudes de los clientes, aun si algunos nodos han caído o experimentan problemas de partición.</li>
+        <li><strong>Soft State (Estado Flexible):</strong> El estado del sistema puede cambiar con el tiempo sin intervención externa, debido a la sincronización asíncrona entre réplicas.</li>
+        <li><strong>Eventual Consistency (Consistencia Eventual):</strong> Si no se producen nuevas actualizaciones sobre un registro, con el tiempo suficiente (normalmente milisegundos) todas las réplicas distribuídas convergerán y tendrán el mismo valor idéntico.</li>
+      </ul>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Referencias Bibliográficas </h3>
+        <ul>
+          <li>Brewer, E. A. (2000). Towards robust distributed systems. <em>Proceedings of the Nineteenth ACM Symposium on Principles of Distributed Computing (PODC)</em>, 7.</li>
+          <li>Gilbert, S., & Lynch, N. (2002). Brewer's conjecture and the feasibility of consistent, available, partition-tolerant web services. <em>ACM SIGACT News</em>, 33(2), 51–59.</li>
+          <li>Pritchett, D. (2008). BASE: An Acid Alternative. <em>ACM Queue</em>, 6(3), 48–55. https://doi.org/10.1145/1394127.1394128</li>
+          <li>Sadalage, P. J., & Fowler, M. (2012). <em>NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence</em>. Addison-Wesley.</li>
+        </ul>
+      </div>
+
+      <!-- Navigation links -->
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./bd-relacional.html" class="read-more-link">&larr; Anterior: Base de Datos Relacional</a>
+        <a href="./nosql-actualidad.html" class="read-more-link">Siguiente: NoSQL en la Actualidad &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

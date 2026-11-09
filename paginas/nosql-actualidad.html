@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Cuáles bases de datos no relacionales se manejan en la actualidad? | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Taxonomía y motores no relacionales líderes: Clave-Valor, Documentales, Wide-Column, Grafos y Bases Vectoriales para IA.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link active">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#temas-academicos">Temas Académicos</a>
+        <span>&rsaquo;</span>
+        <span>Tema 4: Ecosistema NoSQL Actual</span>
+      </nav>
+      <span class="card-badge nosql">Ecosistema NoSQL</span>
+      <h1 class="article-title">¿Cuáles son las bases de datos no relacionales que se manejan en la actualidad?</h1>
+      <div class="article-meta">
+        <span>Publicado: Febrero 2026</span>
+        <span>Lectura estimada: 9 min</span>
+        <span>Área: Persistencia Políglota & Arquitecturas Modernas</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        Hoy en día, el panorama NoSQL se ha consolidado en la industria tecnológica bajo el paradigma de la <strong>persistencia políglota</strong> (Sadalage & Fowler, 2012): la práctica arquitectónica de utilizar distintos motores especializados dentro de un mismo sistema según la naturaleza del dato y la velocidad de acceso requerida.
+      </p>
+
+      <p>
+        Actualmente, las bases de datos no relacionales se clasifican en cuatro familias clásicas consagradas, más una quinta familia emergente nacida de la era de la inteligencia artificial generativa:
+      </p>
+
+      <h2>1. Las 5 Familias de Bases de Datos No Relacionales</h2>
+
+      <!-- Tabla comparativa -->
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Familia</th>
+              <th>Motores Líderes</th>
+              <th>Modelo de Datos</th>
+              <th>Casos de Uso Primarios</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Clave-Valor (Key-Value)</strong></td>
+              <td>Redis, Amazon DynamoDB, Valkey, Aerospike</td>
+              <td>Pares simples de clave arbitraria con valor binario o serializado.</td>
+              <td>Caché distribuida ultrarrápida en memoria RAM, carritos de compras, sesiones de usuario de alta velocidad.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Documentales (Document Stores)</strong></td>
+              <td>MongoDB, Couchbase, Google Cloud Firestore, CouchDB</td>
+              <td>Documentos jerárquicos semiestructurados (JSON / BSON / XML).</td>
+              <td>Catálogos de productos de comercio electrónico, perfiles de usuario, plataformas de blogs y CMS.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Columnar / Wide-Column</strong></td>
+              <td>Apache Cassandra, ScyllaDB, Apache HBase</td>
+              <td>Familias de columnas esparcidas indexadas por clave de partición y clustering.</td>
+              <td>Ingesta masiva de telemetría IoT, métricas financieras en tiempo real, registro de series temporales a escala masiva.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Grafos (Graph Databases)</strong></td>
+              <td>Neo4j, Amazon Neptune, Memgraph, ArangoDB</td>
+              <td>Nodos, relaciones con propiedades y aristas dirigidas (Property Graphs).</td>
+              <td>Detección de fraudes financieros en tiempo real, motores de recomendación, redes sociales, grafos de conocimiento empresarial.</td>
+            </tr>
+            <tr>
+              <td><strong>5. Vectoriales (Vector Databases)</strong></td>
+              <td>Pinecone, Milvus, Qdrant, Weaviate, pgvector</td>
+              <td>Vectores numéricos multidimensionales (Embeddings de 768 - 3072 dimensiones) e índices HNSW.</td>
+              <td>Búsqueda semántica para Inteligencia Artificial Generativa, sistemas RAG (Retrieval-Augmented Generation) y reconocimiento facial.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Análisis Detallado de los Motores Más Utilizados</h2>
+
+      <h3>A. MongoDB (Documental)</h3>
+      <p>
+        Es el motor NoSQL más popular del mundo. Almacena registros en formato <strong>BSON</strong> (representación binaria de JSON). Permite indexación secundaria flexible, agregaciones avanzadas (<em>Aggregation Pipeline</em>) y transacciones ACID multidocumento desde su versión 4.0 (Banker et al., 2016).
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>JSON/BSON Document Example (MongoDB)</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>// Documento de un pedido con ítems embebidos
+{
+  "_id": ObjectId("65e0a1f2b3c4d5e6f7a8b9c0"),
+  "codigo_orden": "ORD-2026-9921",
+  "cliente": {
+    "nombre": "Nicolas Pulido",
+    "email": "npulido@ean.edu.co"
+  },
+  "items": [
+    { "sku": "SERV-DB-01", "producto": "Licencia Enterprise", "precio": 450.00, "cantidad": 2 },
+    { "sku": "HW-NVME-02", "producto": "Disco NVMe 2TB", "precio": 180.00, "cantidad": 1 }
+  ],
+  "total": 1080.00,
+  "fecha": ISODate("2026-02-10T14:30:00Z")
+}</code></pre>
+      </div>
+
+      <h3>B. Redis (Clave-Valor en Memoria)</h3>
+      <p>
+        Funciona completamente en memoria RAM, entregando respuestas con latencias inferiores a un milisegundo. No solo almacena cadenas de texto, sino estructuras de datos avanzadas como listas, conjuntos (sets), mapas de dispersión (hashes), <em>sorted sets</em> y bitmaps.
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>Redis CLI Commands</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code># Almacenar un token de sesión de usuario con expiración de 3600 segundos (1 hora)
+SET session:usr_88291 "{ 'user_id': 105, 'role': 'admin' }" EX 3600
+
+# Incrementar un contador atómico de visitas concurrentes
+INCR metric:page_views:home</code></pre>
+      </div>
+
+      <h3>C. Apache Cassandra (Wide-Column)</h3>
+      <p>
+        Diseñada originalmente por Facebook para la búsqueda en la bandeja de entrada, utiliza una arquitectura P2P (<em>Peer-to-Peer</em>) sin maestro (<em>Masterless</em>). Cada nodo es idéntico a los demás, eliminando cualquier punto único de fallo (<em>No Single Point of Failure</em>) y ofreciendo un rendimiento de escritura masiva insuperable.
+      </p>
+
+      <h3>D. Neo4j (Grafos)</h3>
+      <p>
+        Implementa el principio de <strong>adyacencia sin índice</strong> (<em>Index-Free Adjacency</em>): cada nodo contiene punteros de memoria directos a sus nodos vecinos. Mientras que en un motor relacional encontrar los amigos de los amigos de un usuario requiere costosos <code>JOIN</code> en cadena que saturan la CPU, en Neo4j se navega el grafo a velocidad constante <i>O</i>(1) por paso (Robinson et al., 2015).
+      </p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>Cypher Query Language (Neo4j)</span>
+          <button class="copy-btn">Copiar</button>
+        </div>
+        <pre><code>// Buscar recomendaciones: productos comprados por amigos de Nicolas
+MATCH (u:Usuario {nombre: 'Nicolas'})-[:AMIGO_DE]->(amigo:Usuario)-[:COMPRO]->(prod:Producto)
+WHERE NOT (u)-[:COMPRO]->(prod)
+RETURN prod.nombre, COUNT(*) AS recomendaciones
+ORDER BY recomendaciones DESC
+LIMIT 5;</code></pre>
+      </div>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Referencias Bibliográficas </h3>
+        <ul>
+          <li>Banker, K., Bakkum, P., Verch, S., Garrett, D., & Hawkins, T. (2016). <em>MongoDB in Action</em> (2nd ed.). Manning Publications.</li>
+          <li>Robinson, I., Webber, J., & Eifrem, E. (2015). <em>Graph Databases: New Opportunities for Connected Data</em> (2nd ed.). O'Reilly Media.</li>
+          <li>Sadalage, P. J., & Fowler, M. (2012). <em>NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence</em>. Addison-Wesley.</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./bd-no-relacional.html" class="read-more-link">&larr; Anterior: Base de Datos No Relacional</a>
+        <a href="./motores-licenciados.html" class="read-more-link">Siguiente: Motores Relacionales Licenciados &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

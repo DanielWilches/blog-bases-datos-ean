@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticia: El Ascenso de los Motores HTAP | DataEng Blog — Universidad EAN</title>
+  <meta name="description" content="Cómo las arquitecturas HTAP unifican el procesamiento transaccional y analítico en tiempo real sin pipelines de ETL tradicionales.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>DataEng<span style="color:var(--primary)">Blog</span></span>
+        <span class="brand-badge">EAN</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../index.html#temas-academicos" class="nav-link">Temario Académico</a></li>
+        <li><a href="../index.html#noticias" class="nav-link active">Noticias</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke_linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-container">
+    <header class="article-header">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Inicio</a>
+        <span>&rsaquo;</span>
+        <a href="../index.html#noticias">Noticias Globales</a>
+        <span>&rsaquo;</span>
+        <span>Entrada Cronológica #3</span>
+      </nav>
+      <span class="card-badge news">Arquitectura HTAP</span>
+      <h1 class="article-title">La Convergencia de OLTP y OLAP: El Ascenso de los Motores HTAP y Multimodelo</h1>
+      <div class="article-meta">
+        <span>Publicado: 28 de Noviembre de 2025</span>
+        <span>Lectura estimada: 7 min</span>
+        <span>Por: Redacción Tecnológica &bull; Universidad EAN</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <p>
+        Durante más de tres décadas, la arquitectura de datos empresarial estuvo rígidamente fragmentada en dos mundos incompatibles: por un lado, las bases de datos operacionales <strong>OLTP</strong> (diseñadas para transacciones fila por fila a gran velocidad), y por otro lado, los almacenes de datos <strong>OLAP / Data Warehouses</strong> (diseñados para agregaciones masivas orientadas a columnas).
+      </p>
+
+      <p>
+        El puente que unía ambos mundos eran los pipelines de <strong>ETL (Extracción, Transformación y Carga)</strong>, procesos por lotes pesados y frágiles que solían ejecutarse durante la noche. Como consecuencia directa, los directores de negocio y analistas tomaban decisiones operativas basadas en datos de ayer o de la semana anterior.
+      </p>
+
+      <h2>1. El Fin de la Brecha: ¿Qué es HTAP?</h2>
+      <p>
+        El paradigma <strong>HTAP</strong> (<em>Hybrid Transactional/Analytical Processing</em>), término acuñado por la firma analista Gartner, describe sistemas de bases de datos de última generación capaces de procesar transacciones transaccionales ACID de alta concurrencia y consultas analíticas de Business Intelligence complejas <strong>de forma simultánea y sobre el mismo conjunto de datos</strong>, sin degradar el rendimiento operativo.
+      </p>
+
+      <div class="callout info">
+        <div class="callout-title">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          ¿Cómo logran esta hazaña técnica?
+        </div>
+        <p>
+          Motores vanguardistas como <strong>TiDB</strong> (desarrollado por PingCAP) o <strong>SingleStore</strong> resuelven este desafío manteniendo un almacenamiento dual sincronizado en tiempo real mediante algoritmos de consenso distribuido (Raft). Por ejemplo, en TiDB:
+        </p>
+        <ul>
+          <li>El motor <strong>TiKV</strong> guarda los datos en formato de filas para atender inserciones y transacciones ACID en submilisegundos.</li>
+          <li>Paralelamente, el motor <strong>TiFlash</strong> replica los datos en memoria en formato de columnas para ejecutar consultas analíticas masivas (sumas, agrupamientos y promedios) a velocidad vertiginosa.</li>
+        </ul>
+      </div>
+
+      <h2>2. Casos de Uso Transformadores en la Industria</h2>
+      <ul>
+        <li>
+          <strong>Detección de Fraude en Tiempo Real:</strong> En transacciones bancarias, el sistema compara el patrón de compra actual del cliente contra el histórico de millones de compras pasadas en menos de 50 milisegundos durante la autorización del pago, bloqueando fraudes antes de que el dinero salga de la cuenta.
+        </li>
+        <li>
+          <strong>Precios y Promociones Dinámicas:</strong> En plataformas de comercio electrónico, los algoritmos analizan los inventarios en vivo y el tráfico de navegación concurrentes para ajustar ofertas personalizadas instantáneas.
+        </li>
+      </ul>
+
+      <h2>3. Hacia la Base de Datos Multimodelo Unificada</h2>
+      <p>
+        La maduración de las tecnologías HTAP y los motores multimodelo marca el inicio de una era de consolidación tecnológica: las organizaciones reducen costos operativos drásticamente al no tener que mantener clústeres separados de ETL, colas Kafka sobredimensionadas y duplicación infinita de datos en almacenes externos.
+      </p>
+
+      <!-- Referencias APA 7 -->
+      <div class="references-list">
+        <h3>Fuentes y Referencias</h3>
+        <ul>
+          <li>Gartner Research. (2024). <em>Market Guide for Operational Database Management Systems and HTAP Technologies</em>. Gartner Inc.</li>
+          <li>Huang, D., Liu, Q., Cui, Q., Fang, Z., Ma, X., Xu, F., ... & Tang, L. (2020). TiDB: a Raft-based HTAP database. <em>Proceedings of the VLDB Endowment</em>, 13(12), 3072–3084. https://doi.org/10.14778/3415478.3415535</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:3rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+        <a href="./noticia-2-postgresql-mysql-evolucion.html" class="read-more-link">&larr; Anterior: PostgreSQL 17/18 y MySQL 9</a>
+        <a href="../index.html" class="read-more-link">Volver al Portal de Inicio &rarr;</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 DataEngBlog — Universidad EAN &bull; Diseño e Implementación de Sistemas de Información</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
